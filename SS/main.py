@@ -1,18 +1,29 @@
 import sys
-import subprocess
 import os
-import commands
+import socket
+import subprocess
 from transmissor_SA import *
 from transmissor_SR import *
 from receptor_SA import *
 from receptor_SR import *
 from time import sleep
 
+
 def main():
 
-	ip = commands.getoutput("hostname -i")
 	tSA = TransmissorSA("172.31.11.228")
-	mensagem = str(ip)
+	tSR = TransmissorSR("172.31.11.228")
+	rSR = ReceptorSR("172.31.11.228")
+	rSR.run()
+	rSA = ReceptorSA("172.31.11.228")
+	rSA.run()
+
+	cmd = "hostname --all-ip-addresses|awk '{ print $1 }'"
+	ip = subprocess.check_output(["hostname", "--all-ip-addresses"])
+	ip2 = ip.split()
+
+
+	mensagem = "Nova conexao do supervisor: " + str(ip2[0])
 	tSA.enviar(mensagem)
 
 if __name__ == '__main__':
