@@ -1,12 +1,11 @@
 import pika
 import time
-
+from transmissor_SS import *
 
 class ReceptorSS():
 
     def __init__(self, host):
         super(ReceptorSS, self).__init__()
-
         self.connection = pika.BlockingConnection(pika.ConnectionParameters(host=str(host)))
         self.channel = self.connection.channel()
         self.channel.queue_declare(queue='SS_para_SA')
@@ -28,3 +27,4 @@ class ReceptorSS():
 
 def trata_msg_rec(msg_rec):
     print(msg_rec)
+    tSS.enviar("OK")

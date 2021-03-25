@@ -10,7 +10,7 @@ class TransmissorSA():
         self.parametros = pika.ConnectionParameters(host, 5672, '/', self.credenciais)
         self.conexao = pika.BlockingConnection(self.parametros)
         self.canal = self.conexao.channel()
-        self.canal.queue_declare(queue='SS_para_SA', durable=True)
+        self.canal.queue_declare(queue='SS_para_SA',durable=True)
 
     def enviar(self, mensagem):
 

@@ -9,8 +9,7 @@ from receptor_SR import *
 from time import sleep
 
 
-def main():
-
+if __name__ == '__main__':
 	tSA = TransmissorSA("172.31.11.228")
 	tSR = TransmissorSR("172.31.11.228")
 	rSR = ReceptorSR("172.31.11.228")
@@ -22,9 +21,5 @@ def main():
 	ip = subprocess.check_output(["hostname", "--all-ip-addresses"])
 	ip2 = ip.split()
 
-
 	mensagem = "Nova conexao do supervisor: " + str(ip2[0])
 	tSA.enviar(mensagem)
-
-if __name__ == '__main__':
-	main()

@@ -7,9 +7,10 @@ class ReceptorSS():
     def __init__(self, host):
         super(ReceptorSR, self).__init__()
 
-        self.connection = pika.BlockingConnection(pika.ConnectionParameters(host=str(host)))
+        credenciais = pika.PlainCredentials('std', 'std')
+        self.connection = pika.BlockingConnection(pika.ConnectionParameters(host=str(host), credentials=credenciais))
         self.channel = self.connection.channel()
-        self.channel.queue_declare(queue='SS_para_SR')
+        self.channel.queue_declare(queue='SS_para_SR', durable=True)
         print(' [*] Aguardando mensagens.')
         self.channel.basic_consume(queue='SS_para_SR', on_message_callback=self.proc_msg_rec)
 
