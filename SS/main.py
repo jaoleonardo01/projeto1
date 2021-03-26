@@ -9,13 +9,14 @@ from receptor_SR import *
 from time import sleep
 
 
+
 if __name__ == '__main__':
 	tSA = TransmissorSA("172.31.11.228")
 	tSR = TransmissorSR("172.31.11.228")
 	rSR = ReceptorSR("172.31.11.228")
-	rSR.run()
+	rSR.start()
 	rSA = ReceptorSA("172.31.11.228")
-	rSA.run()
+	rSA.start()
 
 	cmd = "hostname --all-ip-addresses|awk '{ print $1 }'"
 	ip = subprocess.check_output(["hostname", "--all-ip-addresses"])
@@ -23,3 +24,6 @@ if __name__ == '__main__':
 
 	mensagem = "Nova conexao do supervisor: " + str(ip2[0])
 	tSA.enviar(mensagem)
+	while True:
+		sleep(4)
+		tSA.enviar(mensagem)

@@ -1,8 +1,9 @@
 import pika
 import time
+from threading import Thread
 
 
-class ReceptorSR():
+class ReceptorSR(Thread):
 
     def __init__(self, host):
         super(ReceptorSR, self).__init__()
@@ -10,7 +11,7 @@ class ReceptorSR():
         credenciais = pika.PlainCredentials('std', 'std')
         self.connection = pika.BlockingConnection(pika.ConnectionParameters(host=str(host), credentials=credenciais))
         self.channel = self.connection.channel()
-        self.channel.queue_declare(queue='SR_para_SS', durable=True)
+        self.channel.queue_declare(queue='SR_para_SS', durable=False)
         print(' [*] Aguardando mensagens.')
         self.channel.basic_consume(queue='SR_para_SS', on_message_callback=self.proc_msg_rec)
 

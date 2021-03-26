@@ -9,7 +9,7 @@ from time import sleep
 
 def main():
     r = ReceptorSS("localhost")
-    r.run()
+    r.start()
 
 
 if __name__ == '__main__':

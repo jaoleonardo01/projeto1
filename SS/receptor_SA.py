@@ -1,8 +1,9 @@
 import pika
 import time
+from threading import Thread
 
 
-class ReceptorSA():
+class ReceptorSA(Thread):
 
     def __init__(self, host):
         super(ReceptorSA, self).__init__()
