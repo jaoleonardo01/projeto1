@@ -11,11 +11,11 @@ from time import sleep
 
 
 if __name__ == '__main__':
-	tSA = TransmissorSA("172.31.11.228")
-	tSR = TransmissorSR("172.31.11.228")
-	rSR = ReceptorSR("172.31.11.228")
+	tSA = TransmissorSA("10.0.0.29")
+	tSR = TransmissorSR("10.0.0.29")
+	rSR = ReceptorSR("10.0.0.29")
 	rSR.start()
-	rSA = ReceptorSA("172.31.11.228")
+	rSA = ReceptorSA("10.0.0.29")
 	rSA.start()
 
 	cmd = "hostname --all-ip-addresses|awk '{ print $1 }'"

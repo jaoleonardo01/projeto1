@@ -8,8 +8,8 @@ from time import sleep
 
 
 def main():
-    tSS = TransmissorSS("172.31.11.228")
-    rSS = ReceptorSS("172.31.11.228")
+    tSS = TransmissorSS("10.0.0.29")
+    rSS = ReceptorSS("10.0.0.29")
     rSS.run()
 
     cmd = "hostname --all-ip-addresses|awk '{ print $1 }'"
