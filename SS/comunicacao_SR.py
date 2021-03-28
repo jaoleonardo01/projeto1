@@ -50,8 +50,8 @@ class ComunicacaoSR(Thread):
 
         if 'posicaoInicialAlcancada' in msg:
             print("\n Robo em posicao, iniciando caca..")
-            alvoY = self.listaCacas.popitem()
-            alvoX = self.listaCacas.popitem()
+            alvoY = str(self.listaCacas.popitem())
+            alvoX = str(self.listaCacas.popitem())
             print(alvoX[9],alvoY[9])
 
 
