@@ -38,7 +38,8 @@ class ComunicacaoSS(Thread):
         #print(msg)
         if 'moverParaInicio' in msg2:
             #simular movimento
-            print("Iniciando movimentacao para coord. INICIAL " + msg2)
+            print("\nIniciando movimentacao para coord. INICIAL ")
+            print(msg2)
             sleep(5)
             print("\nEm posicao")
             msg2 = "posicaoInicialAlcancada"
@@ -52,7 +53,8 @@ class ComunicacaoSS(Thread):
 
         if 'moverParaCaca' in msg2:
             #simular movimento
-            print("Iniciando movimentacao para coord. " + msg2)
+            print("\nIniciando movimentacao para coord. da caca ")
+            print(msg2)
             sleep(5)
             print("\nEm posicao")
             msg2 = "posicaoCacaAlcancada"
