@@ -44,9 +44,9 @@ class ComunicacaoSR(Thread):
             msg = ""
 
         if 'listaCacas' in msg:
-            listaCacas = msg[1]
-            print("\n" + msg)
-            print("\n" + msg[1])
+            listaCacas = msg
+            listaCacas = listaCacas.split()
+            print(listaCacas(1))
 
         if 'posicaoInicialAlcancada' in msg:
             print("\n Robo em posicao, iniciando caca..")
