@@ -14,7 +14,7 @@ class ComunicacaoSS(Thread):
 
     def __init__(self, host):
         super(ComunicacaoSS, self).__init__()
-
+        self.msg_rec = None
         credenciais = pika.PlainCredentials('std', 'std')
         self.connection = pika.BlockingConnection(pika.ConnectionParameters(host=str(host), credentials=credenciais))
         self.channel = self.connection.channel()
@@ -28,7 +28,7 @@ class ComunicacaoSS(Thread):
         print("robo online com IP " + str(ip2[0]))
 
     def proc_msg_rec(self, ch, method, properties, body):
-        msg_rec = body.decode()
+        self.msg_rec = body.decode()
         self.trata_msg_rec()
 
     def trata_msg_rec(self):

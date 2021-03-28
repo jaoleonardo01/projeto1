@@ -13,7 +13,7 @@ class ComunicacaoSR(Thread):
 
     def __init__(self, host):
         super(ComunicacaoSR, self).__init__()
-
+        self.msg_rec = None
         credenciais = pika.PlainCredentials('std', 'std')
         self.connection = pika.BlockingConnection(pika.ConnectionParameters(host=str(host), credentials=credenciais))
         self.channel = self.connection.channel()
@@ -22,7 +22,7 @@ class ComunicacaoSR(Thread):
         self.channel.basic_consume(queue='SR_para_SS', on_message_callback=self.proc_msg_rec)
 
     def proc_msg_rec(self, ch, method, properties, body):
-        msg_rec = body.decode()
+        self.msg_rec = body.decode()
         self.trata_msg_rec()
 
     def trata_msg_rec(self):
