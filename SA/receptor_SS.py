@@ -1,10 +1,12 @@
 import pika
 import time
+import json
 from transmissor_SS import *
 from threading import Thread
 from random import randint
 
-global emJogo
+global emJogo, caca, cacas
+
 emJogo = False
 
 class ReceptorSS(Thread):
@@ -40,6 +42,7 @@ class ReceptorSS(Thread):
             emJogo = True
             self.gerarCacas()
             msg2 = "0","0",self.cacas[0]['x'],self.cacas[0]['y']
+            msg2 = json.dumps(msg2)
             self.channel.basic_publish(exchange='', routing_key='SA_para_SS', body=msg2)
         else:
             self.channel.basic_publish(exchange='', routing_key='SA_para_SS', body="Nao entendi")
@@ -49,7 +52,6 @@ class ReceptorSS(Thread):
 
     def gerarCacas(self):
         for i in range(0, 5):
-            caca = {}
             caca["x"] = randint(1, 5)
             caca["y"] = randint(1, 5)
             self.cacas.append(caca)
