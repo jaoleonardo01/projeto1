@@ -4,7 +4,7 @@ import json
 from threading import Thread
 from random import randint
 
-global emJogo, caca, cacas
+global emJogo, caca, cacas,msg_rec
 caca = {}
 cacas = []
 
@@ -17,6 +17,7 @@ class ComunicacaoSS(Thread):
         self.coord_r1 = {0,0}
         self.r1_cacasEncontradas = []
         self.cacas = []
+        self.msg_rec = ""
         super(ComunicacaoSS, self).__init__()
         self.msg_rec = None
         self.connection = pika.BlockingConnection(pika.ConnectionParameters(host=str(host)))
