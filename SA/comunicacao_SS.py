@@ -1,7 +1,6 @@
 import pika
 import time
 import json
-from transmissor_SS import *
 from threading import Thread
 from random import randint
 
@@ -11,14 +10,14 @@ cacas = []
 
 emJogo = False
 
-class ReceptorSS(Thread):
+class ComunicacaoSS(Thread):
 
     def __init__(self, host):
 
         self.coord_r1 = {0,0}
         self.r1_cacasEncontradas = []
         self.cacas = []
-        super(ReceptorSS, self).__init__()
+        super(ComunicacaoSS, self).__init__()
         self.msg_rec = None
         self.connection = pika.BlockingConnection(pika.ConnectionParameters(host=str(host)))
         self.channel = self.connection.channel()
@@ -31,20 +30,15 @@ class ReceptorSS(Thread):
         self.msg_rec = body.decode()
         self.trata_msg_rec()
 
-    # print(" [x] Received %r" % body.decode())
-    # time.sleep(body.count(b'.'))
-    # print(" [x] Done")
-    # self.ch.basic_ack(delivery_tag=method.delivery_tag)
-
     def run(self):
         self.channel.start_consuming()
 
     def trata_msg_rec(self):
         msg = self.msg_rec
-        if 'Nova conexao' in msg:
+        if 'Nova conexao do supervisor' in msg:
             emJogo = True
             self.gerarCacas()
-            msg2 = "0","0",self.cacas[0]['x'],self.cacas[0]['y']
+            msg2 = "novoJogo","0","0",self.cacas[0]['x'],self.cacas[0]['y']
             msg2 = json.dumps(msg2)
             try:
                 self.channel.basic_publish(exchange='', routing_key='SA_para_SS2', body=msg2)

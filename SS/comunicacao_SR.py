@@ -1,12 +1,18 @@
+import sys
+import os
+import subprocess
 import pika
 import time
 from threading import Thread
 
+cmd = "hostname --all-ip-addresses|awk '{ print $1 }'"
+ip = subprocess.check_output(["hostname", "--all-ip-addresses"])
+ip2 = ip.split()
 
-class ReceptorSR(Thread):
+class ComunicacaoSR(Thread):
 
     def __init__(self, host):
-        super(ReceptorSR, self).__init__()
+        super(ComunicacaoSR, self).__init__()
 
         credenciais = pika.PlainCredentials('std', 'std')
         self.connection = pika.BlockingConnection(pika.ConnectionParameters(host=str(host), credentials=credenciais))
@@ -17,20 +23,18 @@ class ReceptorSR(Thread):
 
     def proc_msg_rec(self, ch, method, properties, body):
         msg_rec = body.decode()
-        trata_msg_rec(msg_rec)
-
-    # print(" [x] Received %r" % body.decode())
-    # time.sleep(body.count(b'.'))
-    # print(" [x] Done")
-    # self.ch.basic_ack(delivery_tag=method.delivery_tag)
-
-    def run(self):
-        self.channel.start_consuming()
-
+        self.trata_msg_rec(msg_rec)
 
     def trata_msg_rec(self):
         msg = self.msg_rec
         if 'Nova conexao do robo' in msg:
-            self.channel.basic_publish(exchange='', routing_key='SS_para_SR', body="Nova conexao aceita do robo")
-        else:
-            self.channel.basic_publish(exchange='', routing_key='SS_para_SR', body="Nao entendi")
+            msg2 = "Nova conexao do supervisor: " + str(ip2[0])
+            try:
+                self.channel.basic_publish(exchange='', routing_key='SS_para_SA', body=msg2)
+            except:
+                pass
+            self.channel.queue_purge(queue='SS_para_SA')
+            msg = ""
+
+    def run(self):
+        self.channel.start_consuming()

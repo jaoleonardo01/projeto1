@@ -1,12 +1,18 @@
 import pika
 import time
+import json
 from threading import Thread
 
+global ip2
 
-class ReceptorSA(Thread):
+cmd = "hostname --all-ip-addresses|awk '{ print $1 }'"
+ip = subprocess.check_output(["hostname", "--all-ip-addresses"])
+ip2 = ip.split()
+
+class ComunicacaoSA(Thread):
 
     def __init__(self, host):
-        super(ReceptorSA, self).__init__()
+        super(ComunicacaoSA, self).__init__()
 
         credenciais = pika.PlainCredentials('std', 'std')
         self.connection = pika.BlockingConnection(pika.ConnectionParameters(host=str(host), credentials=credenciais))
@@ -18,16 +24,15 @@ class ReceptorSA(Thread):
 
     def proc_msg_rec(self, ch, method, properties, body):
         msg_rec = body.decode()
-        trata_msg_rec(msg_rec)
+        self.trata_msg_rec(msg_rec)
 
-    # print(" [x] Received %r" % body.decode())
-    # time.sleep(body.count(b'.'))
-    # print(" [x] Done")
-    # self.ch.basic_ack(delivery_tag=method.delivery_tag)
+    def trata_msg_rec(self):
+        msg = self.msg_rec
+        msg2 = json.loads(msg)
+        if 'novoJogo' in msg2:
+            msg2 = "novoJogo","0","0",self.cacas[0]['x'],self.cacas[0]['y']
+            msg2 = json.dumps(msg2)
+            print("devemos enviar posicao inicial ao robo" + str(msg2))
 
     def run(self):
         self.channel.start_consuming()
-
-
-def trata_msg_rec(msg_rec):
-    print(msg_rec)
