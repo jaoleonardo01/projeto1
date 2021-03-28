@@ -40,10 +40,10 @@ class ComunicacaoSA(Thread):
             msg4 = json.dumps(msg4)
             #enviar lista de cacas para o SS
             self.channel.basic_publish(exchange='', routing_key='SR_para_SS', body=msg4)
-        self.msg_rec = ""
-        msg2 = ""
-        msg = ""
-        self.channel.queue_purge(queue='SA_para_SS2')
+            self.msg_rec = ""
+            msg2 = ""
+            msg = ""
+            self.channel.queue_purge(queue='SA_para_SS2')
 
     def run(self):
         self.channel.start_consuming()

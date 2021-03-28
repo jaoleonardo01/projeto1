@@ -52,9 +52,11 @@ class ComunicacaoSR(Thread):
             print("\n Robo em posicao, iniciando caca..")
             alvoY = str(self.listaCacas.popitem())
             alvoX = str(self.listaCacas.popitem())
-            print(alvoX[9],alvoY[9])
-
-
+            alvoX = alvoX[9]
+            alvoY = alvoY[9]
+            msg3 = "moverPara",alvoX,alvoY
+            msg3 = json.dumps(msg3)
+            self.channel.basic_publish(exchange='', routing_key='SS_para_SR', body=msg3)
 
     def run(self):
         self.channel.start_consuming()
