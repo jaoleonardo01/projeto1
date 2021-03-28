@@ -34,7 +34,7 @@ class ComunicacaoSA(Thread):
         if 'novoJogo' in msg2:
             msg3 = "moverPara",msg2[1],msg2[2]
             msg3 = json.dumps(msg3)
-            self.channel.basic_publish(exchange='', routing_key='SS_para_SR', body=msg2)
+            self.channel.basic_publish(exchange='', routing_key='SS_para_SR', body=msg3)
 
             moverPara
             print("devemos enviar posicao inicial ao robo" + str(msg2))
