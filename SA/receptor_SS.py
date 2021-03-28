@@ -45,9 +45,9 @@ class ReceptorSS(Thread):
             self.gerarCacas()
             msg2 = "0","0",self.cacas[0]['x'],self.cacas[0]['y']
             msg2 = json.dumps(msg2)
-            self.channel.basic_publish(exchange='', routing_key='SA_para_SS', body=msg2)
+            self.channel.basic_publish(exchange='', routing_key='SA_para_SS2', body=msg2)
         else:
-            self.channel.basic_publish(exchange='', routing_key='SA_para_SS', body="Nao entendi")
+            self.channel.basic_publish(exchange='', routing_key='SA_para_SS2', body="Nao entendi")
 
     def novoMapa(self):
         self.channel.start_consuming()
