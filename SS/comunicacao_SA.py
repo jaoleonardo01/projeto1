@@ -32,6 +32,6 @@ class ComunicacaoSA(Thread):
         msg2 = json.loads(msg)
         if 'novoJogo' in msg2:
             print("devemos enviar posicao inicial ao robo" + str(msg2))
-
+        msg = ""
     def run(self):
         self.channel.start_consuming()
