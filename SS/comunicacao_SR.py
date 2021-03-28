@@ -45,8 +45,6 @@ class ComunicacaoSR(Thread):
 
         if 'listaCacas' in msg:
             listaCacas = msg
-            listaCacas = listaCacas.split()
-            print(msg(18))
             print(msg())
 
         if 'posicaoInicialAlcancada' in msg:
