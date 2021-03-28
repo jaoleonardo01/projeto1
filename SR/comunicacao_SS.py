@@ -38,8 +38,9 @@ class ComunicacaoSS(Thread):
         #print(msg)
         if 'moverPara' in msg2:
             #simular movimento
-            print("iniciando movimentacao")
+            print("Iniciando movimentacao")
             sleep(5)
+            print("\nEm posicao")
             msg2 = "posicaoInicialAlcancada"
             try:
                 self.channel.basic_publish(exchange='', routing_key='SR_para_SS', body=msg2)

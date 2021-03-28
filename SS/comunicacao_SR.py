@@ -2,6 +2,7 @@ import sys
 import os
 import subprocess
 import pika
+import json
 from time import sleep
 from threading import Thread
 
@@ -28,8 +29,8 @@ class ComunicacaoSR(Thread):
 
     def trata_msg_rec(self):
         msg = self.msg_rec
-        #print(msg)
-        if 'Nova conexao do robo' in msg:
+        msg2 = json.loads(msg)
+        if 'Nova conexao do robo' in msg2:
             msg2 = "Nova conexao do supervisor: " + str(ip2[0])
             try:
                 self.channel.basic_publish(exchange='', routing_key='SS_para_SA', body=msg2)
@@ -39,6 +40,9 @@ class ComunicacaoSR(Thread):
             self.msg_rec = ""
             msg2 = ""
             msg = ""
+
+        if 'listaCacas' in msg2:
+            print(msg2)
 
         if 'posicaoInicialAlcancada' in msg:
             print("\n Robo em posicao, iniciando caca..")
