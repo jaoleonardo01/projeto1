@@ -52,7 +52,7 @@ class ComunicacaoSS(Thread):
         self.channel.start_consuming()
 
     def gerarCacas(self):
-        for i in range(0, 2):
+        for i in range(0, 3):
             lista = ['A', 'B', 'C', 'D', 'E', 'F']
             caca["x"] = lista[randint(0, 5)]
             caca["y"] = str(randint(1, 6))
