@@ -2,7 +2,7 @@ import sys
 import os
 import subprocess
 import pika
-import time
+from time import sleep
 from threading import Thread
 
 cmd = "hostname --all-ip-addresses|awk '{ print $1 }'"
@@ -30,6 +30,7 @@ class ComunicacaoSR(Thread):
         if 'Nova conexao do robo' in msg:
             msg2 = "Nova conexao do supervisor: " + str(ip2[0])
             try:
+                sleep(0.1)
                 #self.channel.basic_publish(exchange='', routing_key='SS_para_SA', body=msg2)
             except:
                 pass
