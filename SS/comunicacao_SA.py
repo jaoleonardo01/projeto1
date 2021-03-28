@@ -20,6 +20,7 @@ class ComunicacaoSA(Thread):
         self.channel = self.connection.channel()
         self.channel.queue_declare(queue='SA_para_SS2', durable=False)
         self.channel.queue_purge(queue='SA_para_SS2')
+        self.channel.queue_purge(queue='SS_para_SA')
         print(' [*] Aguardando mensagens.')
         self.channel.basic_consume(queue='SA_para_SS2', on_message_callback=self.proc_msg_rec)
 
