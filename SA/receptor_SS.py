@@ -1,8 +1,8 @@
 import pika
 import time
-from gerador import *
 from transmissor_SS import *
 from threading import Thread
+from random import randint
 
 global emJogo
 emJogo = False
@@ -39,7 +39,8 @@ class ReceptorSS(Thread):
         if 'Nova conexao' in msg:
             emJogo = True
             self.gerarCacas()
-            self.channel.basic_publish(exchange='', routing_key='SA_para_SS', body=self.coord_r1 + self.cacas[0]['x'] + self.cacas[0]['y'])
+            msg2 = self.coord_r1 + self.cacas[0]['x'] + self.cacas[0]['y']
+            self.channel.basic_publish(exchange='', routing_key='SA_para_SS', body=msg2)
         else:
             self.channel.basic_publish(exchange='', routing_key='SA_para_SS', body="Nao entendi")
 
