@@ -39,7 +39,7 @@ class ComunicacaoSS(Thread):
         msg = self.msg_rec
         if 'Nova conexao do supervisor' in msg:
             print("\n" + msg)
-            msg2 = "novoJogo","A","0",str(self.cacas['x']), str(self.cacas['y'])
+            msg2 = "novoJogo","A","0",str(self.cacas['x1']), str(self.cacas['y1']),str(self.cacas['x2']), str(self.cacas['y2']),str(self.cacas['x3']), str(self.cacas['y3'])
             msg2 = json.dumps(msg2)
             self.channel.basic_publish(exchange='', routing_key='SA_para_SS2', body=msg2)
             self.channel.queue_purge(queue='SA_para_SS2')
@@ -51,9 +51,13 @@ class ComunicacaoSS(Thread):
 
     def gerarCacas(self):
         lista = ['A', 'B', 'C', 'D', 'E', 'F']
-        x = lista[randint(0, 5)]
-        y = randint(1, 6)
-        self.cacas = {'x': x, 'y': y}
+        x1 = lista[randint(0, 5)]
+        y1 = randint(1, 6)
+        x2 = lista[randint(0, 5)]
+        y2 = randint(1, 6)
+        x3 = lista[randint(0, 5)]
+        y3 = randint(1, 6)
+        self.cacas = {'x1': x1, 'y1': y1,'x2': x2, 'y2': y2, 'x3': x3, 'y3': y3 }
         #for i in range(0, 3):
         #    x = lista[randint(0, 5)]
         #    y = str(randint(1, 6))
