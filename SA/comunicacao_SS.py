@@ -4,9 +4,7 @@ import json
 from threading import Thread
 from random import randint
 
-global emJogo, caca, cacas,msg_rec
-caca = {}
-cacas = []
+global emJogo, msg_rec
 
 emJogo = False
 
@@ -17,6 +15,7 @@ class ComunicacaoSS(Thread):
         self.coord_r1 = {0,0}
         self.r1_cacasEncontradas = []
         self.cacas = []
+        self.caca = {}
         self.gerarCacas()
         self.msg_rec = ""
         super(ComunicacaoSS, self).__init__()
