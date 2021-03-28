@@ -39,7 +39,7 @@ class ComunicacaoSS(Thread):
         msg = self.msg_rec
         if 'Nova conexao do supervisor' in msg:
             print(msg)
-            msg2 = "novoJogo","A","0",str(self.cacas[0])
+            msg2 = "novoJogo","A","0",str(self.cacas)
             msg2 = json.dumps(msg2)
             self.channel.basic_publish(exchange='', routing_key='SA_para_SS2', body=msg2)
             self.channel.queue_purge(queue='SA_para_SS2')
