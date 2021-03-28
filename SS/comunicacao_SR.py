@@ -46,7 +46,7 @@ class ComunicacaoSR(Thread):
         if 'listaCacas' in msg:
             msg5 = msg.split()
             self.listaCacas = {'x1':msg5[1],'y1':msg5[2],'x2':msg5[3],'y2':msg5[4],'x3':msg5[5],'y3':msg5[6]}
-            print(self.listaCacas)
+            #print(self.listaCacas)
 
         if 'posicaoInicialAlcancada' in msg:
             msg7 = "robo1PosicaoAlcancada " + msg[23] + msg[24]
