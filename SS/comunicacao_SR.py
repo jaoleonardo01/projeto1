@@ -52,7 +52,7 @@ class ComunicacaoSR(Thread):
             print("\n Robo em posicao, iniciando caca..")
             alvoY = self.listaCacas.popitem()
             alvoX = self.listaCacas.popitem()
-            print(alvoX,alvoY)
+            print(alvoX[9],alvoY[9])
 
 
 
