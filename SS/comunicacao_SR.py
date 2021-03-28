@@ -60,14 +60,14 @@ class ComunicacaoSR(Thread):
             self.channel.basic_publish(exchange='', routing_key='SS_para_SR', body=msg3)
         if 'posicaoCacaAlcancada' in msg:
             if len(self.listaCacas) > 0:
-                print("\n Robo em posicao, iniciando caca..")
+                print("\n Continuando caca..")
                 alvoY = str(self.listaCacas.popitem())
                 alvoX = str(self.listaCacas.popitem())
                 alvoX = alvoX[9]
                 alvoY = alvoY[9]
                 msg3 = "moverParaCaca", alvoX, alvoY
                 msg3 = json.dumps(msg3)
-                print("\n Robo em deslocamento para caca: " + alvoX, alvoY)
+                print("\n Agora o alvo eh: " + alvoX, alvoY)
                 self.channel.basic_publish(exchange='', routing_key='SS_para_SR', body=msg3)
             else:
                 print("todas as cacas foram alcancadas")
