@@ -6,6 +6,8 @@ from threading import Thread
 from random import randint
 
 global emJogo, caca, cacas
+caca = {}
+cacas = []
 
 emJogo = False
 
