@@ -46,10 +46,10 @@ class ComunicacaoSS(Thread):
             self.msg_rec = ""
             msg = ""
         if 'robo1CacaAlcancada' in msg:
-            print("\nRobo 1 em posicao da CACA" + msg)
+            print("\nRobo 1 em posicao da CACA  " + msg)
 
         if 'robo1PosicaoAlcancada' in msg:
-            print("\nRobo 1 em posicao inicial" + msg)
+            print("\nRobo 1 em posicao inicial  " + msg)
 
 
     def novoMapa(self):
