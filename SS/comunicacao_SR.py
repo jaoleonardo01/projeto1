@@ -77,6 +77,9 @@ class ComunicacaoSR(Thread):
                 print("\n Agora o alvo eh: " + self.alvoX, self.alvoY)
                 self.channel.basic_publish(exchange='', routing_key='SS_para_SR', body=msg3)
             else:
+                msg5 = "robo1CacaAlcancada " + self.alvoX + self.alvoY
+                msg5 = json.dumps(msg5)
+                self.channel.basic_publish(exchange='', routing_key='SS_para_SA', body=msg5)
                 print("todas as cacas foram alcancadas")
 
     def run(self):
