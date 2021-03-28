@@ -34,6 +34,7 @@ class ComunicacaoSR(Thread):
             except:
                 pass
             self.channel.queue_purge(queue='SS_para_SA')
+
             msg = ""
 
     def run(self):
