@@ -35,13 +35,10 @@ class ComunicacaoSA(Thread):
             msg3 = "moverPara",msg2[1],msg2[2]
             msg3 = json.dumps(msg3)
             self.channel.basic_publish(exchange='', routing_key='SS_para_SR', body=msg3)
-
-            moverPara
-            print("devemos enviar posicao inicial ao robo" + str(msg2))
         self.msg_rec = ""
         msg2 = ""
         msg = ""
-        self.channel.queue_purge(queue='SA_para_SS2')
+        #self.channel.queue_purge(queue='SA_para_SS2')
 
     def run(self):
         self.channel.start_consuming()
