@@ -23,6 +23,7 @@ class ReceptorSS(Thread):
         self.connection = pika.BlockingConnection(pika.ConnectionParameters(host=str(host)))
         self.channel = self.connection.channel()
         self.channel.queue_declare(queue='SS_para_SA')
+        self.channel.queue_purge(SA_para_SS2)
         print(' [*] Aguardando mensagens.')
         self.channel.basic_consume(queue='SS_para_SA', on_message_callback=self.proc_msg_rec)
 
@@ -49,6 +50,7 @@ class ReceptorSS(Thread):
                 self.channel.basic_publish(exchange='', routing_key='SA_para_SS2', body=msg2)
             except:
                 pass
+            self.channel.queue_purge(SA_para_SS2)
             msg = ""
 
     def novoMapa(self):
