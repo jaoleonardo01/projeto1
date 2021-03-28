@@ -30,7 +30,7 @@ class ComunicacaoSR(Thread):
         if 'Nova conexao do robo' in msg:
             msg2 = "Nova conexao do supervisor: " + str(ip2[0])
             try:
-                self.channel.basic_publish(exchange='', routing_key='SS_para_SA', body=msg2)
+                #self.channel.basic_publish(exchange='', routing_key='SS_para_SA', body=msg2)
             except:
                 pass
             self.channel.queue_purge(queue='SS_para_SA')
