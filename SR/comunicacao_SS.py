@@ -36,9 +36,9 @@ class ComunicacaoSS(Thread):
         msg = self.msg_rec
         msg2 = json.loads(msg)
         #print(msg)
-        if 'moverPara' in msg2:
+        if 'moverParaInicio' in msg2:
             #simular movimento
-            print("Iniciando movimentacao")
+            print("Iniciando movimentacao para coord. INICIAL " + msg2)
             sleep(5)
             print("\nEm posicao")
             msg2 = "posicaoInicialAlcancada"
@@ -46,10 +46,24 @@ class ComunicacaoSS(Thread):
                 self.channel.basic_publish(exchange='', routing_key='SR_para_SS', body=msg2)
             except:
                 pass
-        self.channel.queue_purge(queue='SS_para_SA')
-        self.msg_rec = ""
-        msg2 = ""
-        sg = ""
+            self.channel.queue_purge(queue='SS_para_SA')
+            self.msg_rec = ""
+            msg2 = ""
+
+        if 'moverParaCaca' in msg2:
+            #simular movimento
+            print("Iniciando movimentacao para coord. " + msg2)
+            sleep(5)
+            print("\nEm posicao")
+            msg2 = "posicaoCacaAlcancada"
+            try:
+                self.channel.basic_publish(exchange='', routing_key='SR_para_SS', body=msg2)
+            except:
+                pass
+            self.channel.queue_purge(queue='SS_para_SA')
+            self.msg_rec = ""
+            msg2 = ""
+
 
     def run(self):
         self.channel.start_consuming()

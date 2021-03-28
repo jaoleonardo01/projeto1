@@ -32,7 +32,7 @@ class ComunicacaoSA(Thread):
         msg = self.msg_rec
         msg2 = json.loads(msg)
         if 'novoJogo' in msg2:
-            msg3 = "moverPara",msg2[1],msg2[2]
+            msg3 = "moverParaInicio",msg2[1],msg2[2]
             msg3 = json.dumps(msg3)
             self.channel.basic_publish(exchange='', routing_key='SS_para_SR', body=msg3)
             print("Enviado comando posicao inicial para o robo" + str(msg3))
