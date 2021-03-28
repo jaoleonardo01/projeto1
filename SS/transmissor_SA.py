@@ -15,5 +15,8 @@ class TransmissorSA(Thread):
 
     def enviar(self, mensagem):
 
-        self.canal.basic_publish(exchange='', routing_key='SS_para_SA', body=mensagem)
-        #self.conexao.close()
+        try:
+            self.canal.basic_publish(exchange='', routing_key='SS_para_SA', body=mensagem)
+            #self.conexao.close()
+        except:
+            pass
