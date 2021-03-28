@@ -37,16 +37,17 @@ class ComunicacaoSS(Thread):
         #print(msg)
         if 'moverPara' in msg2:
             #simular movimento
+            print("iniciando movimentacao")
             sleep(5)
             msg2 = "posicaoAlcancada "
             try:
-                self.channel.basic_publish(exchange='', routing_key='SS_para_SA', body=msg2)
+                self.channel.basic_publish(exchange='', routing_key='SR_para_SS', body=msg2)
             except:
                 pass
-        self.channel.queue_purge(queue='SS_para_SA')
+        #self.channel.queue_purge(queue='SS_para_SA')
         self.msg_rec = ""
         msg2 = ""
-        msg = ""
+        sg = ""
 
     def run(self):
         self.channel.start_consuming()
