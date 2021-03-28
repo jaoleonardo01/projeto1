@@ -39,6 +39,7 @@ class ComunicacaoSS(Thread):
     def trata_msg_rec(self):
         msg = self.msg_rec
         if 'Nova conexao do supervisor' in msg:
+            print(msg)
             msg2 = "novoJogo","0","0",self.cacas[0]['x'],self.cacas[0]['y']
             msg2 = json.dumps(msg2)
             self.channel.basic_publish(exchange='', routing_key='SA_para_SS2', body=msg2)
