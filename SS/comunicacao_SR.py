@@ -44,7 +44,8 @@ class ComunicacaoSR(Thread):
             msg = ""
 
         if 'listaCacas' in msg:
-            listaCacas = {'x1':msg[1],'y1':msg[2],'x2':msg[3],'y2':msg[4],'x3':msg[5],'y3':msg[6]}
+            msg5 = msg.split()
+            listaCacas = {'x1':msg5[1],'y1':msg5[2],'x2':msg5[3],'y2':msg5[4],'x3':msg5[5],'y3':msg5[6]}
             print(listaCacas)
 
         if 'posicaoInicialAlcancada' in msg:
