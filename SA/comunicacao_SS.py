@@ -45,12 +45,12 @@ class ComunicacaoSS(Thread):
             self.channel.queue_purge(queue='SA_para_SS2')
             self.msg_rec = ""
             msg = ""
-        if 'robo1CacaAlcancada' in msg:
-            print("\nRobo 1 em posicao da CACA  " + msg)
 
         if 'robo1PosicaoAlcancada' in msg:
             print("\nRobo 1 em posicao inicial  " + msg)
 
+        if 'robo1CacaAlcancada' in msg:
+            print("\nRobo 1 em posicao da CACA  " + msg)
 
     def novoMapa(self):
         self.channel.start_consuming()
