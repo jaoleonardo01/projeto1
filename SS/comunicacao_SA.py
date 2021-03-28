@@ -33,5 +33,7 @@ class ComunicacaoSA(Thread):
         if 'novoJogo' in msg2:
             print("devemos enviar posicao inicial ao robo" + str(msg2))
         msg2 = ""
+        self.channel.queue_purge(queue='SA_para_SS2')
+
     def run(self):
         self.channel.start_consuming()
