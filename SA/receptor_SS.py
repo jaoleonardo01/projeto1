@@ -40,7 +40,7 @@ class ReceptorSS(Thread):
             emJogo = True
             self.gerarCacas()
             msg2 = "0","0",self.cacas[0]['x'],self.cacas[0]['y']
-            self.channel.basic_publish(exchange='', routing_key='SA_para_SS', body="msg2")
+            self.channel.basic_publish(exchange='', routing_key='SA_para_SS', body=msg2)
         else:
             self.channel.basic_publish(exchange='', routing_key='SA_para_SS', body="Nao entendi")
 
