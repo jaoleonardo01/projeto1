@@ -17,7 +17,7 @@ class ComunicacaoSR(Thread):
         credenciais = pika.PlainCredentials('std', 'std')
         self.connection = pika.BlockingConnection(pika.ConnectionParameters(host=str(host), credentials=credenciais))
         self.channel = self.connection.channel()
-        self.channel.queue_declare(queue='SR_para_SS', durable=False)
+        self.channel.queue_declare(queue='SR_para_SS')
         self.channel.queue_purge(queue='SS_para_SA')
         print(' [*] Aguardando mensagens.')
         self.channel.basic_consume(queue='SR_para_SS', on_message_callback=self.proc_msg_rec)
