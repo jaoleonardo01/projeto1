@@ -18,6 +18,7 @@ class ComunicacaoSR(Thread):
         self.connection = pika.BlockingConnection(pika.ConnectionParameters(host=str(host), credentials=credenciais))
         self.channel = self.connection.channel()
         self.channel.queue_declare(queue='SR_para_SS', durable=False)
+        self.channel.queue_purge(queue='SS_para_SA')
         print(' [*] Aguardando mensagens.')
         self.channel.basic_consume(queue='SR_para_SS', on_message_callback=self.proc_msg_rec)
 
@@ -30,13 +31,13 @@ class ComunicacaoSR(Thread):
         if 'Nova conexao do robo' in msg:
             msg2 = "Nova conexao do supervisor: " + str(ip2[0])
             try:
-                sleep(0.1)
-                #self.channel.basic_publish(exchange='', routing_key='SS_para_SA', body=msg2)
+                self.channel.basic_publish(exchange='', routing_key='SS_para_SA', body=msg2)
             except:
                 pass
-            self.channel.queue_purge(queue='SS_para_SA')
-
-            msg = ""
+        self.channel.queue_purge(queue='SS_para_SA')
+        self.msg_rec = ""
+        msg2 = ""
+        msg = ""
 
     def run(self):
         self.channel.start_consuming()
