@@ -26,7 +26,7 @@ class ComunicacaoSS(Thread):
         #robo vai se anunciar
         msg2 = "Nova conexao do robo: " + str(ip2[0])
         self.channel.basic_publish(exchange='', routing_key='SR_para_SS', body=msg2)
-        print("robo online com IP " + str(ip2[0]))
+        print("\nrobo online com IP " + str(ip2[0]))
 
     def proc_msg_rec(self, ch, method, properties, body):
         self.msg_rec = body.decode()
