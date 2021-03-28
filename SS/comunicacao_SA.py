@@ -25,7 +25,7 @@ class ComunicacaoSA(Thread):
 
     def proc_msg_rec(self, ch, method, properties, body):
         msg_rec = body.decode()
-        self.trata_msg_rec(msg_rec)
+        self.trata_msg_rec()
 
     def trata_msg_rec(self):
         msg = self.msg_rec
