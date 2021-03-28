@@ -44,8 +44,8 @@ class ComunicacaoSS(Thread):
                 self.channel.basic_publish(exchange='', routing_key='SA_para_SS2', body=msg2)
             except:
                 pass
-            self.channel.queue_purge(queue='SA_para_SS2')
-            msg = ""
+            #self.channel.queue_purge(queue='SA_para_SS2')
+
 
     def novoMapa(self):
         self.channel.start_consuming()
