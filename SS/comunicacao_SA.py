@@ -35,7 +35,7 @@ class ComunicacaoSA(Thread):
             msg3 = "moverParaInicio",msg2[1],msg2[2]
             msg3 = json.dumps(msg3)
             self.channel.basic_publish(exchange='', routing_key='SS_para_SR', body=msg3)
-            print("Enviado comando posicao inicial para o robo")
+            print("\nEnviado comando posicao inicial para o robo")
             msg4 = "listaCacas",msg2[3],msg2[4],msg2[5],msg2[6],msg2[7],msg2[8]
             msg4 = json.dumps(msg4)
             #enviar lista de cacas para o SS
