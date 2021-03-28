@@ -40,7 +40,7 @@ class ComunicacaoSS(Thread):
         msg = self.msg_rec
         if 'Nova conexao do supervisor' in msg:
             print(msg)
-            msg2 = "novoJogo","0","0",self.cacas[0]['x'],self.cacas[0]['y']
+            msg2 = "novoJogo","A","0",self.cacas[0]['x'],self.cacas[0]['y'],self.cacas[1]['x'],self.cacas[1]['y'],self.cacas[2]['x'],self.cacas[2]['y']
             msg2 = json.dumps(msg2)
             self.channel.basic_publish(exchange='', routing_key='SA_para_SS2', body=msg2)
             self.channel.queue_purge(queue='SA_para_SS2')
@@ -54,5 +54,5 @@ class ComunicacaoSS(Thread):
         for i in range(0, 5):
             lista = ['A', 'B', 'C', 'D', 'E', 'F']
             caca["x"] = lista[randint(0, 5)]
-            caca["y"] = randint(1, 6)
+            caca["y"] = str(randint(1, 6))
             self.cacas.append(caca)
