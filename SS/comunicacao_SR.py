@@ -10,7 +10,7 @@ cmd = "hostname --all-ip-addresses|awk '{ print $1 }'"
 ip = subprocess.check_output(["hostname", "--all-ip-addresses"])
 ip2 = ip.split()
 
-global listaCacas,proxAlvo
+global listaCacas,proxAlvo, alvoX, alvoY
 
 class ComunicacaoSR(Thread):
 
@@ -49,22 +49,28 @@ class ComunicacaoSR(Thread):
             print(self.listaCacas)
 
         if 'posicaoInicialAlcancada' in msg:
+            msg7 = "robo1PosicaoAlcancada" + msg[1] + msg[2]
+            self.channel.basic_publish(exchange='', routing_key='SS_para_SR', body=msg3)
             print("\n Robo em posicao, iniciando caca..")
-            alvoY = str(self.listaCacas.popitem())
-            alvoX = str(self.listaCacas.popitem())
-            alvoX = alvoX[9]
-            alvoY = alvoY[9]
-            msg3 = "moverParaCaca",alvoX,alvoY
+            self.alvoY = str(self.listaCacas.popitem())
+            self.alvoX = str(self.listaCacas.popitem())
+            self.alvoX = self.alvoX[9]
+            self.alvoY = self.alvoY[9]
+            msg3 = "moverParaCaca",self.alvoX,self.alvoY
             msg3 = json.dumps(msg3)
-            print("\n Robo em deslocamento para caca: " + alvoX,alvoY)
+            print("\n Robo em deslocamento para caca: " + self.alvoX,self.alvoY)
             self.channel.basic_publish(exchange='', routing_key='SS_para_SR', body=msg3)
         if 'posicaoCacaAlcancada' in msg:
             if len(self.listaCacas) > 0:
+                #validar caca com o SA
+                msg4 = "robo1CacaAlcancada" + self.alvoX + self.alvoY
+                msg4 = json.dumps(msg4)
+                self.channel.basic_publish(exchange='', routing_key='SS_para_SA', body=msg4)
                 print("\n Continuando caca..")
-                alvoY = str(self.listaCacas.popitem())
-                alvoX = str(self.listaCacas.popitem())
-                alvoX = alvoX[9]
-                alvoY = alvoY[9]
+                self.alvoY = str(self.listaCacas.popitem())
+                self.alvoX = str(self.listaCacas.popitem())
+                self.alvoX = self.alvoX[9]
+                self.alvoY = self.alvoY[9]
                 msg3 = "moverParaCaca", alvoX, alvoY
                 msg3 = json.dumps(msg3)
                 print("\n Agora o alvo eh: " + alvoX, alvoY)
