@@ -35,10 +35,13 @@ class ComunicacaoSR(Thread):
                 self.channel.basic_publish(exchange='', routing_key='SS_para_SA', body=msg2)
             except:
                 pass
-        self.channel.queue_purge(queue='SS_para_SA')
-        self.msg_rec = ""
-        msg2 = ""
-        msg = ""
+            self.channel.queue_purge(queue='SS_para_SA')
+            self.msg_rec = ""
+            msg2 = ""
+            msg = ""
+
+        if 'posicaoInicialAlcancada' in msg:
+            print("\n Robo em posicao, iniciando caca..")
 
     def run(self):
         self.channel.start_consuming()

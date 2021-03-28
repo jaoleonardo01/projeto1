@@ -40,7 +40,7 @@ class ComunicacaoSS(Thread):
             #simular movimento
             print("iniciando movimentacao")
             sleep(5)
-            msg2 = "posicaoAlcancada "
+            msg2 = "posicaoInicialAlcancada"
             try:
                 self.channel.basic_publish(exchange='', routing_key='SR_para_SS', body=msg2)
             except:
