@@ -28,5 +28,9 @@ class ReceptorSR(Thread):
         self.channel.start_consuming()
 
 
-def trata_msg_rec(msg_rec):
-    print(msg_rec)
+    def trata_msg_rec(self):
+        msg = self.msg_rec
+        if 'Nova conexao do robo' in msg:
+            self.channel.basic_publish(exchange='', routing_key='SS_para_SR', body="Nova conexao aceita do robo")
+        else:
+            self.channel.basic_publish(exchange='', routing_key='SS_para_SR', body="Nao entendi")

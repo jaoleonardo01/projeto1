@@ -1,5 +1,6 @@
 import pika
 from time import sleep
+from comp import *
 from threading import Thread
 
 class TransmissorSS(Thread):
@@ -11,6 +12,14 @@ class TransmissorSS(Thread):
         self.conexao = pika.BlockingConnection(self.parametros)
         self.canal = self.conexao.channel()
         self.canal.queue_declare(queue='SR_para_SS', durable=False)
+
+    def run(self):
+        global obj_comp
+
+        while True:
+            obj_comp.esp_evento(TransmitirEvento)
+            env_msg_disp.wait()
+
 
     def enviar(self, mensagem):
 

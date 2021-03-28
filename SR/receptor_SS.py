@@ -1,6 +1,11 @@
 import pika
 import time
 from threading import Thread
+from comp import *
+
+
+env_msg = None
+env_msg_disp = threading.Event()
 
 
 class ReceptorSS(Thread):
@@ -17,7 +22,11 @@ class ReceptorSS(Thread):
 
     def proc_msg_rec(self, ch, method, properties, body):
         msg_rec = body.decode()
-        trata_msg_rec(msg_rec)
+        #trata_msg_rec(msg_rec)
+
+        global env_msg
+        env_msg = msg_rec
+        env_msg_disp.set()
 
     # print(" [x] Received %r" % body.decode())
     # time.sleep(body.count(b'.'))

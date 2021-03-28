@@ -8,14 +8,14 @@ from receptor_SA import *
 from receptor_SR import *
 from time import sleep
 
-
+servidor = "10.0.0.29"
 
 if __name__ == '__main__':
-	tSA = TransmissorSA("10.0.0.29")
-	tSR = TransmissorSR("10.0.0.29")
-	rSR = ReceptorSR("10.0.0.29")
+	tSA = TransmissorSA(servidor)
+	tSR = TransmissorSR(servidor)
+	rSR = ReceptorSR(servidor)
 	rSR.start()
-	rSA = ReceptorSA("10.0.0.29")
+	rSA = ReceptorSA(servidor)
 	rSA.start()
 
 	cmd = "hostname --all-ip-addresses|awk '{ print $1 }'"

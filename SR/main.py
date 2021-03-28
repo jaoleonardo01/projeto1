@@ -6,10 +6,11 @@ from transmissor_SS import *
 from receptor_SS import *
 from time import sleep
 
+servidor = "10.0.0.29"
 
 def main():
-    tSS = TransmissorSS("10.0.0.29")
-    rSS = ReceptorSS("10.0.0.29")
+    tSS = TransmissorSS(servidor)
+    rSS = ReceptorSS(servidor)
     rSS.run()
 
     cmd = "hostname --all-ip-addresses|awk '{ print $1 }'"

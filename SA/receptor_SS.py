@@ -1,11 +1,19 @@
 import pika
 import time
+from gerador import *
 from transmissor_SS import *
 from threading import Thread
+
+global emJogo
+emJogo = False
 
 class ReceptorSS(Thread):
 
     def __init__(self, host):
+
+        self.coord_r1 = {0,0}
+        self.r1_cacasEncontradas = []
+        self.cacas = []
         super(ReceptorSS, self).__init__()
         self.msg_rec = None
         self.connection = pika.BlockingConnection(pika.ConnectionParameters(host=str(host)))
@@ -29,6 +37,18 @@ class ReceptorSS(Thread):
     def trata_msg_rec(self):
         msg = self.msg_rec
         if 'Nova conexao' in msg:
-            self.channel.basic_publish(exchange='', routing_key='SA_para_SS', body="Nova conexao aceita")
+            emJogo = True
+            self.gerarCacas()
+            self.channel.basic_publish(exchange='', routing_key='SA_para_SS', body=self.coord_r1 + self.cacas[0]['x'] + self.cacas[0]['y'])
         else:
             self.channel.basic_publish(exchange='', routing_key='SA_para_SS', body="Nao entendi")
+
+    def novoMapa(self):
+        self.channel.start_consuming()
+
+    def gerarCacas(self):
+        for i in range(0, 5):
+            caca = {}
+            caca["x"] = randint(1, 5)
+            caca["y"] = randint(1, 5)
+            self.cacas.append(caca)
