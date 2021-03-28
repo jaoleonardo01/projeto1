@@ -25,6 +25,7 @@ class ComunicacaoSS(Thread):
 
         #robo vai se anunciar
         msg2 = "Nova conexao do robo: " + str(ip2[0])
+        msg2 = json.dumps(msg2)
         self.channel.basic_publish(exchange='', routing_key='SR_para_SS', body=msg2)
         print("robo online com IP " + str(ip2[0]))
 
