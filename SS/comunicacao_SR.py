@@ -45,13 +45,13 @@ class ComunicacaoSR(Thread):
 
         if 'listaCacas' in msg:
             msg5 = msg.split()
-            listaCacas = {'x1':msg5[1],'y1':msg5[2],'x2':msg5[3],'y2':msg5[4],'x3':msg5[5],'y3':msg5[6]}
-            #print(listaCacas)
+            self.listaCacas = {'x1':msg5[1],'y1':msg5[2],'x2':msg5[3],'y2':msg5[4],'x3':msg5[5],'y3':msg5[6]}
+            print(self.listaCacas)
 
         if 'posicaoInicialAlcancada' in msg:
             print("\n Robo em posicao, iniciando caca..")
-            alvoY = listaCacas.popitem()
-            alvoX = listaCacas.popitem()
+            alvoY = self.listaCacas.popitem()
+            alvoX = self.listaCacas.popitem()
             print(alvoX,alvoY)
 
 
