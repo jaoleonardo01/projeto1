@@ -10,7 +10,7 @@ cmd = "hostname --all-ip-addresses|awk '{ print $1 }'"
 ip = subprocess.check_output(["hostname", "--all-ip-addresses"])
 ip2 = ip.split()
 
-global listaCacas
+global listaCacas,proxAlvo
 
 class ComunicacaoSR(Thread):
 
@@ -46,10 +46,14 @@ class ComunicacaoSR(Thread):
         if 'listaCacas' in msg:
             msg5 = msg.split()
             listaCacas = {'x1':msg5[1],'y1':msg5[2],'x2':msg5[3],'y2':msg5[4],'x3':msg5[5],'y3':msg5[6]}
-            print(listaCacas)
+            #print(listaCacas)
 
         if 'posicaoInicialAlcancada' in msg:
             print("\n Robo em posicao, iniciando caca..")
+            alvoY = listaCacas.popitem()
+            alvoX = listaCacas.popitem()
+            print(alvoX,alvoY)
+
 
 
     def run(self):
