@@ -11,9 +11,9 @@ class ReceptorSA(Thread):
         credenciais = pika.PlainCredentials('std', 'std')
         self.connection = pika.BlockingConnection(pika.ConnectionParameters(host=str(host), credentials=credenciais))
         self.channel = self.connection.channel()
-        self.channel.queue_declare(queue='SA_para_SS')
+        self.channel.queue_declare(queue='SA_para_SS2', durable=False)
         print(' [*] Aguardando mensagens.')
-        self.channel.basic_consume(queue='SA_para_SS', on_message_callback=self.proc_msg_rec)
+        self.channel.basic_consume(queue='SA_para_SS2', on_message_callback=self.proc_msg_rec)
 
     def proc_msg_rec(self, ch, method, properties, body):
         msg_rec = body.decode()

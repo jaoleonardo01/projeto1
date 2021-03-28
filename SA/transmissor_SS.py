@@ -11,9 +11,9 @@ class TransmissorSS(Thread):
         self.parametros = pika.ConnectionParameters(host, 5672, '/', self.credenciais)
         self.conexao = pika.BlockingConnection(self.parametros)
         self.canal = self.conexao.channel()
-        self.canal.queue_declare(queue='SA_para_SS', durable=False)
+        self.canal.queue_declare(queue='SA_para_SS2', durable=False)
 
     def enviar(self, mensagem):
 
-        self.canal.basic_publish(exchange='', routing_key='SA_para_SS', body=mensagem)
+        self.canal.basic_publish(exchange='', routing_key='SA_para_SS2', body=mensagem)
         self.conexao.close()
