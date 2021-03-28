@@ -48,6 +48,7 @@ class ComunicacaoSS(Thread):
             self.channel.queue_purge(queue='SA_para_SS2')
             self.msg_rec = ""
             msg = ""
+            ronaldo
 
     def novoMapa(self):
         self.channel.start_consuming()
