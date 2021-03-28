@@ -56,7 +56,9 @@ class ComunicacaoSS(Thread):
             self.pontRobo1 = self.pontRobo1 +1
             if self.pontRobo1 == 3:
                 print("\nPartida finalizada. Robo 1 encontrou as 3 cacas  ")
-
+                self.channel.basic_publish(exchange='', routing_key='SA_para_SS2', body="FINALIZAR")
+                self.connection.close()
+                exit(-1)
 
     def novoMapa(self):
         self.channel.start_consuming()

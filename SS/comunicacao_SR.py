@@ -82,5 +82,10 @@ class ComunicacaoSR(Thread):
                 self.channel.basic_publish(exchange='', routing_key='SS_para_SA', body=msg5)
                 print("todas as cacas foram alcancadas")
 
+        if 'FINALIZAR' in msg:
+            self.channel.basic_publish(exchange='', routing_key='SS_para_SR', body="FINALIZAR")
+            self.connection.close()
+            exit(-1)
+
     def run(self):
         self.channel.start_consuming()

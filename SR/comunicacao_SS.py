@@ -66,6 +66,10 @@ class ComunicacaoSS(Thread):
             self.msg_rec = ""
             msg2 = ""
 
+        if 'FINALIZAR' in msg2:
+            self.connection.close()
+            exit(-1)
+
 
     def run(self):
         self.channel.start_consuming()
