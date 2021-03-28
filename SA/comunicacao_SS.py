@@ -38,14 +38,14 @@ class ComunicacaoSS(Thread):
         if 'Nova conexao do supervisor' in msg:
             emJogo = True
             self.gerarCacas()
-            msg2 = "novoJogo","0","0",self.cacas[0]['x'],self.cacas[0]['y'],self.cacas[1]['x'],self.cacas[1]['y'],self.cacas[1]['x'],self.cacas[1]['y']
+            msg2 = "novoJogo","0","0",self.cacas[0]['x'],self.cacas[0]['y']
             msg2 = json.dumps(msg2)
             try:
                 self.channel.basic_publish(exchange='', routing_key='SA_para_SS2', body=msg2)
             except:
                 pass
             self.channel.queue_purge(queue='SA_para_SS2')
-
+            msg = ""
 
     def novoMapa(self):
         self.channel.start_consuming()
