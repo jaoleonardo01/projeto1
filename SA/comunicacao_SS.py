@@ -43,12 +43,12 @@ class ComunicacaoSS(Thread):
             msg2 = json.dumps(msg2)
             try:
                 self.channel.basic_publish(exchange='', routing_key='SA_para_SS2', body=msg2)
+                sleep(10)
             except:
                 pass
             self.channel.queue_purge(queue='SA_para_SS2')
             self.msg_rec = ""
             msg = ""
-            ronaldo
 
     def novoMapa(self):
         self.channel.start_consuming()
