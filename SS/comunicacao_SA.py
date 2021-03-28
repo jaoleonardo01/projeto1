@@ -33,6 +33,7 @@ class ComunicacaoSA(Thread):
         if 'FINALIZAR' in msg:
             self.channel.basic_publish(exchange='', routing_key='SR_para_SS', body="FINALIZAR")
             self.connection.close()
+            exit(-1)
         msg2 = json.loads(msg)
         if 'novoJogo' in msg2:
             msg3 = "moverParaInicio",msg2[1],msg2[2]
