@@ -46,6 +46,7 @@ class ComunicacaoSS(Thread):
             except:
                 pass
             self.channel.queue_purge(queue='SA_para_SS2')
+            self.msg_rec = ""
             msg = ""
 
     def novoMapa(self):
