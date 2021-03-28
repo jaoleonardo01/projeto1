@@ -46,13 +46,7 @@ class ComunicacaoSS(Thread):
             self.msg_rec = ""
             msg = ""
         if 'robo1CacaAlcancada' in msg:
-            print("\n" + msg)
-            msg2 = "novoJogo","A","0",str(self.cacas['x1']), str(self.cacas['y1']),str(self.cacas['x2']), str(self.cacas['y2']),str(self.cacas['x3']), str(self.cacas['y3'])
-            msg2 = json.dumps(msg2)
-            self.channel.basic_publish(exchange='', routing_key='SA_para_SS2', body=msg2)
-            self.channel.queue_purge(queue='SA_para_SS2')
-            self.msg_rec = ""
-            msg = ""
+            print("\nRobo 1 em posicao da CACA" + msg)
 
         if 'robo1PosicaoAlcancada' in msg:
             print("\nRobo 1 em posicao inicial" + msg)
