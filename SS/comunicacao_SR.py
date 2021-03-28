@@ -44,12 +44,13 @@ class ComunicacaoSR(Thread):
             msg = ""
 
         if 'listaCacas' in msg:
-            print(msg)
+            listaCacas = msg[1]
+            print("\n" + msg)
+            print("\n" + msg[1])
 
         if 'posicaoInicialAlcancada' in msg:
             print("\n Robo em posicao, iniciando caca..")
-            listaCacas = msg[1]
-            print(listaCacas)
+
 
     def run(self):
         self.channel.start_consuming()
