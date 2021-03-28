@@ -4,7 +4,7 @@ import json
 from threading import Thread
 from random import randint
 
-global emJogo, msg_rec
+global emJogo, msg_rec,pontRobo1
 
 emJogo = False
 
@@ -17,6 +17,7 @@ class ComunicacaoSS(Thread):
         self.cacas = [{'A','0'},{'A','0'},{'A','0'}]
         self.caca = {}
         self.gerarCacas()
+        self.pontRobo1 = 0
         self.msg_rec = ""
         super(ComunicacaoSS, self).__init__()
         self.msg_rec = None
@@ -51,6 +52,11 @@ class ComunicacaoSS(Thread):
 
         if 'robo1CacaAlcancada' in msg:
             print("\nRobo 1 em posicao da CACA  " + msg)
+            #validar cacas
+            self.pontRobo1 = self.pontRobo1 +1
+            if self.pontRobo1 == 3:
+                print("\nPartida finalizada. Robo 1 encontrou as 3 cacas  ")
+
 
     def novoMapa(self):
         self.channel.start_consuming()
