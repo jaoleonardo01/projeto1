@@ -23,7 +23,6 @@ if __name__ == '__main__':
 	ip2 = ip.split()
 
 	mensagem = "Nova conexao do supervisor: " + str(ip2[0])
-	tSA.enviar(mensagem)
 	while True:
 		sleep(4)
 		tSA.enviar(mensagem)
