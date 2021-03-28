@@ -10,6 +10,8 @@ cmd = "hostname --all-ip-addresses|awk '{ print $1 }'"
 ip = subprocess.check_output(["hostname", "--all-ip-addresses"])
 ip2 = ip.split()
 
+global listaCacas
+
 class ComunicacaoSR(Thread):
 
     def __init__(self, host):
@@ -46,6 +48,8 @@ class ComunicacaoSR(Thread):
 
         if 'posicaoInicialAlcancada' in msg:
             print("\n Robo em posicao, iniciando caca..")
+            listaCacas = msg[1]
+            print(listaCacas)
 
     def run(self):
         self.channel.start_consuming()
