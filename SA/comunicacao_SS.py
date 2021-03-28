@@ -14,7 +14,7 @@ class ComunicacaoSS(Thread):
 
         self.coord_r1 = {0,0}
         self.r1_cacasEncontradas = []
-        self.cacas = []
+        self.cacas = [{'A','0'},{'A','0'},{'A','0'}]
         self.caca = {}
         self.gerarCacas()
         self.msg_rec = ""
@@ -52,8 +52,6 @@ class ComunicacaoSS(Thread):
     def gerarCacas(self):
         lista = ['A', 'B', 'C', 'D', 'E', 'F']
         for i in range(0, 3):
-            self.caca["x"] = lista[randint(0, 5)]
-            self.caca["y"] = str(randint(1, 6))
-            self.cacas.append(self.caca)
-            sleep(1)
-            print(self.cacas)
+            x = lista[randint(0, 5)]
+            y = str(randint(1, 6))
+            self.cacas[i] = {x, y}
