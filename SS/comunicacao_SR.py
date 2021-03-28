@@ -29,11 +29,12 @@ class ComunicacaoSR(Thread):
     def trata_msg_rec(self):
         msg = self.msg_rec
         if 'Nova conexao do robo' in msg:
-            msg2 = "Nova conexao do supervisor: " + str(ip2[0])
-            try:
-                self.channel.basic_publish(exchange='', routing_key='SS_para_SA', body=msg2)
-            except:
-                pass
+            #msg2 = "Nova conexao do supervisor: " + str(ip2[0])
+            print("Nova conexao do supervisor: " + str(ip2[0]))
+            #try:
+            #    self.channel.basic_publish(exchange='', routing_key='SS_para_SA', body=msg2)
+            #except:
+            #    pass
         self.channel.queue_purge(queue='SS_para_SA')
         self.msg_rec = ""
         msg2 = ""
