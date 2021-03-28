@@ -50,7 +50,7 @@ class ComunicacaoSR(Thread):
 
         if 'posicaoInicialAlcancada' in msg:
             msg7 = "robo1PosicaoAlcancada" + msg[1] + msg[2]
-            self.channel.basic_publish(exchange='', routing_key='SS_para_SR', body=msg7)
+            self.channel.basic_publish(exchange='', routing_key='SS_para_SA', body=msg7)
             print("\n Robo em posicao, iniciando caca..")
             self.alvoY = str(self.listaCacas.popitem())
             self.alvoX = str(self.listaCacas.popitem())
