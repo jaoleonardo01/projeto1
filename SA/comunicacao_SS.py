@@ -54,6 +54,6 @@ class ComunicacaoSS(Thread):
         for i in range(0, 3):
             self.caca["x"] = lista[randint(0, 5)]
             self.caca["y"] = str(randint(1, 6))
-            self.cacas.append(caca)
+            self.cacas.append(self.caca)
             sleep(1)
-            print(cacas)
+            print(self.cacas)
