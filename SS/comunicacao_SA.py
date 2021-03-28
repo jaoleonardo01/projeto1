@@ -31,8 +31,6 @@ class ComunicacaoSA(Thread):
         msg = self.msg_rec
         msg2 = json.loads(msg)
         if 'novoJogo' in msg2:
-            msg2 = "novoJogo","0","0",self.cacas[0]['x'],self.cacas[0]['y']
-            msg2 = json.dumps(msg2)
             print("devemos enviar posicao inicial ao robo" + str(msg2))
 
     def run(self):
