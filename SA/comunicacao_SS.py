@@ -52,6 +52,7 @@ class ComunicacaoSS(Thread):
 
     def gerarCacas(self):
         for i in range(0, 5):
-            caca["x"] = randint(1, 5)
-            caca["y"] = randint(1, 5)
+            lista = ['A', 'B', 'C', 'D', 'E', 'F']
+            caca["x"] = lista[randint(0, 5)]
+            caca["y"] = randint(1, 6)
             self.cacas.append(caca)

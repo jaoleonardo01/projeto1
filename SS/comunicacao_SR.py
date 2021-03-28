@@ -28,7 +28,7 @@ class ComunicacaoSR(Thread):
 
     def trata_msg_rec(self):
         msg = self.msg_rec
-        print(msg)
+        #print(msg)
         if 'Nova conexao do robo' in msg:
             msg2 = "Nova conexao do supervisor: " + str(ip2[0])
             try:

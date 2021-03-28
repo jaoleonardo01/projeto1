@@ -2,7 +2,7 @@ import sys
 import os
 import subprocess
 import pika
-import time
+from time import sleep
 import json
 from threading import Thread
 
@@ -32,7 +32,21 @@ class ComunicacaoSS(Thread):
         self.trata_msg_rec()
 
     def trata_msg_rec(self):
-        print(self.msg_rec)
+        msg = self.msg_rec
+        msg2 = json.loads(msg)
+        #print(msg)
+        if 'moverPara' in msg2:
+            #simular movimento
+            sleep(5)
+            msg2 = "posicaoAlcancada "
+            try:
+                self.channel.basic_publish(exchange='', routing_key='SS_para_SA', body=msg2)
+            except:
+                pass
+        self.channel.queue_purge(queue='SS_para_SA')
+        self.msg_rec = ""
+        msg2 = ""
+        msg = ""
 
     def run(self):
         self.channel.start_consuming()
