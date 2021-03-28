@@ -34,6 +34,11 @@ class ComunicacaoSS(Thread):
 
     def trata_msg_rec(self):
         msg = self.msg_rec
+
+        if 'FINALIZAR' in msg:
+            self.connection.close()
+            exit(-1)
+
         msg2 = json.loads(msg)
         #print(msg)
         if 'moverParaInicio' in msg2:
@@ -65,11 +70,6 @@ class ComunicacaoSS(Thread):
             self.channel.queue_purge(queue='SS_para_SA')
             self.msg_rec = ""
             msg2 = ""
-
-        if 'FINALIZAR' in msg2:
-            self.connection.close()
-            exit(-1)
-
 
     def run(self):
         self.channel.start_consuming()
