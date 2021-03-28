@@ -1,5 +1,5 @@
 import pika
-import time
+from time import sleep
 import json
 from threading import Thread
 from random import randint
