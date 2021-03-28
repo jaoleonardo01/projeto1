@@ -30,6 +30,9 @@ class ComunicacaoSA(Thread):
 
     def trata_msg_rec(self):
         msg = self.msg_rec
+        if 'FINALIZAR' in msg:
+            self.channel.basic_publish(exchange='', routing_key='SR_para_SS', body="FINALIZAR")
+            self.connection.close()
         msg2 = json.loads(msg)
         if 'novoJogo' in msg2:
             msg3 = "moverParaInicio",msg2[1],msg2[2]
@@ -44,9 +47,7 @@ class ComunicacaoSA(Thread):
             msg2 = ""
             msg = ""
             self.channel.queue_purge(queue='SA_para_SS2')
-        if 'FINALIZAR' in msg2:
-            self.channel.basic_publish(exchange='', routing_key='SR_para_SS', body="FINALIZAR")
-            self.connection.close()
+
 
     def run(self):
         self.channel.start_consuming()
