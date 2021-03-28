@@ -17,6 +17,7 @@ class ComunicacaoSS(Thread):
         self.coord_r1 = {0,0}
         self.r1_cacasEncontradas = []
         self.cacas = []
+        self.gerarCacas()
         self.msg_rec = ""
         super(ComunicacaoSS, self).__init__()
         self.msg_rec = None
@@ -37,15 +38,11 @@ class ComunicacaoSS(Thread):
     def trata_msg_rec(self):
         msg = self.msg_rec
         if 'Nova conexao do supervisor' in msg:
+            sleep(10)
             emJogo = True
-            self.gerarCacas()
             msg2 = "novoJogo","0","0",self.cacas[0]['x'],self.cacas[0]['y']
             msg2 = json.dumps(msg2)
-            try:
-                self.channel.basic_publish(exchange='', routing_key='SA_para_SS2', body=msg2)
-                sleep(10)
-            except:
-                pass
+            self.channel.basic_publish(exchange='', routing_key='SA_para_SS2', body=msg2)
             self.channel.queue_purge(queue='SA_para_SS2')
             self.msg_rec = ""
             msg = ""
