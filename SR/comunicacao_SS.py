@@ -44,7 +44,7 @@ class ComunicacaoSS(Thread):
                 self.channel.basic_publish(exchange='', routing_key='SR_para_SS', body=msg2)
             except:
                 pass
-        #self.channel.queue_purge(queue='SS_para_SA')
+        self.channel.queue_purge(queue='SS_para_SA')
         self.msg_rec = ""
         msg2 = ""
         sg = ""
