@@ -50,7 +50,7 @@ class ReceptorSS(Thread):
                 self.channel.basic_publish(exchange='', routing_key='SA_para_SS2', body=msg2)
             except:
                 pass
-            self.channel.queue_purge(SA_para_SS2)
+            self.channel.queue_purge(queue='SA_para_SS2')
             msg = ""
 
     def novoMapa(self):
