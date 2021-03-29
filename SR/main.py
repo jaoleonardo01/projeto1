@@ -5,7 +5,7 @@ import subprocess
 from comunicacao_SS import *
 from time import sleep
 
-servidor = "10.0.0.29"
+servidor = "172.31.31.200"
 
 def main():
     cSS = ComunicacaoSS(servidor)

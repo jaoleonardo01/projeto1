@@ -36,6 +36,7 @@ class ComunicacaoSS(Thread):
         msg = self.msg_rec
 
         if 'FINALIZAR' in msg:
+            print("\nEncerrando, fim de partida..")
             self.connection.close()
             exit(-1)
 
