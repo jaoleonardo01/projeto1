@@ -6,7 +6,7 @@ Aluno: João Leonardo Martins**
 
 ## Projeto Prático 1:
 
-Consiste em um jogo do tipo captura de bandeiras, onde um sistema gerenciador media uma partida a ser disputada entre robôs e seus sistemas gestores. 
+Consiste em um jogo do tipo captura de bandeiras, onde um sistema gerenciador medeia uma partida a ser disputada entre robôs e seus sistemas gestores. 
 
 A forma de comunicação escolhida foi através de Enfileiramento de Mensagem (AMQP Protocol), utilizando RabbitMQ e Pika Python. 
 
@@ -64,4 +64,5 @@ python3 /main.py
 ### Pontos de melhoria
 
 - Apenas um robô/sistema auditor foi implementado - tornar o código escalável
+- Implementar um sistema de validação de caças pelo auditor
 - Dificuldades na criação da imagem do servidor RabbitMQ/Auditor: o serviço não inicializa automaticamente e deve ser executado manualmente, conforme passo a passo anterior
